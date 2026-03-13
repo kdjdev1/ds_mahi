@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Divisional Secretariat Mahiyangana - Super Digital Kiosk</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&family=Noto+Serif+Sinhala:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Background Slider Container -->
+    <div class="bg-slider" id="bgSlider"></div>
+    <div class="bg-overlay"></div>
+
+    <!-- Floating Light Particles -->
+    <div class="light-particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <!-- Splash Screen -->
+    <div class="splash-screen active" id="splashScreen">
+        <div class="splash-brand">Divisional Secretariat Mahiyangana</div>
+        <div class="splash-content">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Emblem_of_Sri_Lanka.svg/1024px-Emblem_of_Sri_Lanka.svg.png" alt="Emblem" class="emblem" onerror="this.style.display='none'">
+            <h1 class="flash-text">ආයුබෝවන්</h1>
+            <p class="sub-text">සාදරයෙන් පිළිගනිමු</p>
+            <div class="loading-bar"><div class="loading-progress"></div></div>
+        </div>
+    </div>
+
+    <!-- Main App Container -->
+    <main class="app-container" id="mainContainer">
+        
+        <!-- Header -->
+        <header class="glass-header">
+            <div class="header-left">
+                <div class="brand-title">
+                    <span class="highlight">Mahiyangana</span> Divisional Secretariat
+                </div>
+                <div class="sub-title">IT UNIT</div>
+            </div>
+            <div class="header-right">
+                <div class="datetime-widget">
+                    <div class="time" id="currentTime">00:00</div>
+                    <div class="date" id="currentDate">Jan 01, 2026</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dynamic Content Area -->
+        <div class="view-area" id="viewArea">
+            
+            <!-- Dashboard View -->
+            <div class="view-section active" id="dashboardView">
+                <h2 class="section-title">ප්‍රධාන මෙනුව <span class="subtitle">කරුණාකර තෝරන්න (Tap to select)</span></h2>
+                
+                <div class="kiosk-grid">
+                    <!-- Services -->
+                    <div class="kiosk-card hover-glow span-2" onclick="openModal('developmentInProgress')">
+                        <div class="icon-box info"><i class="fa-solid fa-briefcase"></i></div>
+                        <h3>සේවා</h3>
+                        <p>අපෙන් ලබාගත හැකි සියලුම සේවාවන්</p>
+                    </div>
+
+                    <!-- WhatsApp -->
+                    <div class="kiosk-card hover-glow span-2" onclick="switchView('whatsappView')">
+                        <div class="icon-box info pulse-icon" style="color:#25D366; text-shadow:0 0 20px rgba(37,211,102,0.8); background: rgba(37,211,102,0.1); box-shadow: inset 0 0 20px rgba(37,211,102,0.1); border: 1px solid rgba(37,211,102,0.3);"><i class="fa-brands fa-whatsapp"></i></div>
+                        <h3>WhatsApp</h3>
+                        <p>QR කේතය ස්කෑන් කර අප හා සම්බන්ධ වන්න</p>
+                    </div>
+
+                    <!-- Feedback / Suggestions -->
+                    <div class="kiosk-card hover-glow span-2" onclick="switchView('feedbackView')">
+                        <div class="icon-box forms" style="color:#eab308; box-shadow: inset 0 0 20px rgba(234,179,8,0.1); border: 1px solid rgba(234,179,8,0.3);"><i class="fa-solid fa-comments"></i></div>
+                        <h3>අදහස් / යෝජනා</h3>
+                        <p>ඔබගේ වටිනා අදහස් හා පැමිණිලි</p>
+                    </div>
+
+                    <!-- Officer View Trigger -->
+                    <div class="kiosk-card hover-glow featured span-3" onclick="window.open('http://www.mahiyanganaya.ds.gov.lk/index.php/en/', '_blank')">
+                        <div class="icon-box phone"><i class="fa-solid fa-globe"></i></div>
+                        <h3>අපගේ වෙබ් අඩවිය</h3>
+                        <p>කාර්යාලීය නිල වෙබ් අඩවිය පිවිසෙන්න</p>
+                    </div>
+
+                    <!-- Flashy Phone Numbers -> Now Officers Information -->
+                    <div class="kiosk-card phone-special span-3" onclick="switchView('categoriesView')">
+                        <div class="card-glow-bg"></div>
+                        <div class="icon-box pulse-icon"><i class="fa-solid fa-address-book"></i></div>
+                        <h3>නිලධාරීන්ගේ තොරතුරු</h3>
+                        <p>මාණ්ඩලික, ග්‍රාම සහ ආර්ථික සංවර්ධන නිලධාරීන්</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Categories View (Directory) -->
+            <div class="view-section" id="categoriesView">
+                <div class="view-header">
+                    <button class="back-btn" onclick="switchView('dashboardView')">
+                        <i class="fa-solid fa-chevron-left"></i> ප්‍රධාන මෙනුවට
+                    </button>
+                    <h2>නිලධාරීන්ගේ තොරතුරු කාණ්ඩ</h2>
+                </div>
+
+                <div class="categories-grid">
+                    <div class="cat-card staff" onclick="loadGallery('staff', 'මාණ්ඩලික නිලධාරීන්')">
+                        <i class="fa-solid fa-user-tie"></i>
+                        <h3>මාණ්ඩලික නිලධාරීන්</h3>
+                    </div>
+                    <div class="cat-card grama" onclick="loadGallery('grama', 'ග්‍රාම නිලධාරීන්')">
+                        <i class="fa-solid fa-users"></i>
+                        <h3>ග්‍රාම නිලධාරීන්</h3>
+                    </div>
+                    <div class="cat-card eco" onclick="loadGallery('eco', 'ආර්ථික සංවර්ධන නිලධාරීන්')">
+                        <i class="fa-solid fa-leaf"></i>
+                        <h3>ආර්ථික සංවර්ධන නිලධාරීන්</h3>
+                    </div>
+                    <div class="cat-card field" onclick="openModal('developmentInProgress')">
+                        <i class="fa-solid fa-person-walking-luggage"></i>
+                        <h3>ක්ෂේත්‍ර නිලධාරීන්</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gallery View -->
+            <div class="view-section" id="galleryView">
+                <div class="view-header">
+                    <button class="back-btn" onclick="switchView('categoriesView')">
+                        <i class="fa-solid fa-chevron-left"></i> කාණ්ඩ මෙනුවට
+                    </button>
+                    <h2 id="galleryTitle">ගැලරිය</h2>
+                </div>
+                
+                <!-- List Area for Divisions -->
+                <div class="wasam-grid" id="galleryContainer">
+                    <!-- Buttons will be injected here via JS -->
+                </div>
+            </div>
+
+            <!-- Full Image View -->
+            <div class="view-section" id="fullImageView">
+                <div class="view-header">
+                    <button class="back-btn" onclick="switchView('galleryView')">
+                        <i class="fa-solid fa-chevron-left"></i> ආපසු (Back)
+                    </button>
+                    <h2 id="fullImageTitle">නම</h2>
+                </div>
+                <div class="full-image-container">
+                    <img id="fullImageElement" src="" alt="Full Image" />
+                </div>
+            </div>
+
+            <!-- Phone Categories View -->
+            <div class="view-section" id="phoneCategoriesView">
+                <div class="view-header">
+                    <button class="back-btn" onclick="switchView('dashboardView')">
+                        <i class="fa-solid fa-chevron-left"></i> ප්‍රධාන මෙනුවට
+                    </button>
+                    <h2>දුරකථන නාමාවලිය - කාණ්ඩ තෝරන්න</h2>
+                </div>
+
+                <div class="categories-grid">
+                    <div class="cat-card staff" onclick="openModal('developmentInProgress')">
+                        <i class="fa-solid fa-user-tie"></i>
+                        <h3>මාණ්ඩලික නිලධාරීන්</h3>
+                        <p>Staff Officers</p>
+                    </div>
+                    <div class="cat-card grama" onclick="openModal('developmentInProgress')">
+                        <i class="fa-solid fa-users"></i>
+                        <h3>ග්‍රාම නිලධාරීන්</h3>
+                        <p>Grama Niladhari</p>
+                    </div>
+                    <div class="cat-card eco" onclick="openModal('developmentInProgress')">
+                        <i class="fa-solid fa-leaf"></i>
+                        <h3>ආර්ථික සංවර්ධන නිලධාරීන්</h3>
+                        <p>Economic Development Officers</p>
+                    </div>
+                    <div class="cat-card field" onclick="openModal('developmentInProgress')">
+                        <i class="fa-solid fa-person-walking-luggage"></i>
+                        <h3>ක්ෂේත්‍ර නිලධාරීන්</h3>
+                        <p>Field Officers</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Website Embed View -->
+            <div class="view-section" id="websiteView">
+                <div class="view-header">
+                    <button class="back-btn" onclick="switchView('dashboardView')">
+                        <i class="fa-solid fa-chevron-left"></i> ප්‍රධාන මෙනුවට
+                    </button>
+                    <h2>නිල වෙබ් අඩවිය</h2>
+                </div>
+                <div class="iframe-container">
+                    <iframe src="http://www.mahiyanganaya.ds.gov.lk/index.php/en/" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- WhatsApp QR View -->
+            <div class="view-section" id="whatsappView">
+                <div class="view-header">
+                    <button class="back-btn" onclick="switchView('dashboardView')">
+                        <i class="fa-solid fa-chevron-left"></i> ප්‍රධාන මෙනුවට
+                    </button>
+                    <h2>WhatsApp හරහා අප හා සම්බන්ධ වන්න</h2>
+                </div>
+                <div class="whatsapp-container">
+                    <div class="whatsapp-qr-card">
+                        <div class="wa-icon-glow">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </div>
+                        <h3>077 515 7763</h3>
+                        <p>ඔබගේ දුරකථනයෙන් පහත QR කේතය ස්කෑන් කරන්න (Scan me)</p>
+                        <div class="qr-image-wrapper">
+                            <!-- Using reliable API to generate QR for wa.me link -->
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://wa.me/94775157763&color=0f172a&bgcolor=ffffff&margin=10" alt="WhatsApp QR Code">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feedback View -->
+            <div class="view-section" id="feedbackView">
+                <div class="view-header">
+                    <button class="back-btn" onclick="switchView('dashboardView')">
+                        <i class="fa-solid fa-chevron-left"></i> ප්‍රධාන මෙනුවට
+                    </button>
+                    <h2>අදහස්, යෝජනා හෝ පැමිණිලි</h2>
+                </div>
+                
+                <div class="feedback-container">
+                    <form id="feedbackForm" class="feedback-form" onsubmit="submitFeedback(event)">
+                        
+                        <div class="form-group">
+                            <label><i class="fa-solid fa-tag"></i> 1. කුමක් සම්බන්ධයෙන්ද? (Type)</label>
+                            <div class="feedback-types">
+                                <label class="type-card">
+                                    <input type="radio" name="feedbackType" value="අදහසක් (Idea)" required>
+                                    <div class="type-content">
+                                        <i class="fa-regular fa-lightbulb"></i>
+                                        <span>අදහසක්</span>
+                                    </div>
+                                </label>
+                                <label class="type-card">
+                                    <input type="radio" name="feedbackType" value="යෝජනාවක් (Proposal)">
+                                    <div class="type-content">
+                                        <i class="fa-solid fa-bullhorn"></i>
+                                        <span>යෝජනාවක්</span>
+                                    </div>
+                                </label>
+                                <label class="type-card">
+                                    <input type="radio" name="feedbackType" value="පැමිණිල්ලක් (Complaint)">
+                                    <div class="type-content">
+                                        <i class="fa-solid fa-circle-exclamation"></i>
+                                        <span>පැමිණිල්ලක්</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label><i class="fa-solid fa-user"></i> 2. ඔබගේ නම (Name)</label>
+                            <input type="text" id="fbName" name="name" class="glass-input" placeholder="ඔබගේ නම මෙහි ඇතුලත් කරන්න" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label><i class="fa-solid fa-briefcase"></i> 3. පැමිණි කාරණය (Reason for Visit)</label>
+                            <input type="text" id="fbReason" name="reason" class="glass-input" placeholder="කාර්යාලයට පැමිණීමට හේතුව" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label><i class="fa-solid fa-pen"></i> 4. විස්තරය (Details)</label>
+                            <textarea id="fbDetails" name="details" class="glass-input" rows="3" placeholder="ඔබගේ අදහස හෝ පැමිණිල්ල මෙහි ලියන්න" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label><i class="fa-solid fa-face-smile"></i> 5. කාර්යාලයේ සේවය පිළිබඳ ඔබගේ තෘප්තිමත්භාවය</label>
+                            <div class="smiley-rating">
+                                <label>
+                                    <input type="radio" name="satisfaction" value="ඉතා අසතුටුයි (Very Dissatisfied)" required>
+                                    <div class="smiley" data-tooltip="ඉතා අසතුටුයි">😡</div>
+                                </label>
+                                <label>
+                                    <input type="radio" name="satisfaction" value="අසතුටුයි (Dissatisfied)">
+                                    <div class="smiley" data-tooltip="අසතුටුයි">😞</div>
+                                </label>
+                                <label>
+                                    <input type="radio" name="satisfaction" value="මධ්‍යස්ථයි (Neutral)">
+                                    <div class="smiley" data-tooltip="මධ්‍යස්ථයි">😐</div>
+                                </label>
+                                <label>
+                                    <input type="radio" name="satisfaction" value="සතුටුයි (Satisfied)">
+                                    <div class="smiley" data-tooltip="සතුටුයි">🙂</div>
+                                </label>
+                                <label>
+                                    <input type="radio" name="satisfaction" value="ඉතා සතුටුයි (Very Satisfied)">
+                                    <div class="smiley" data-tooltip="ඉතා සතුටුයි">😍</div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="submit-btn" id="fbSubmitBtn">
+                            <i class="fa-solid fa-paper-plane"></i> ඉදිරිපත් කරන්න
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="glass-footer">
+            <p><i class="fa-solid fa-bolt"></i> create by DSM It Unit @2026</p>
+        </footer>
+
+    </main>
+
+    <!-- General Alert Modal -->
+    <div class="modal-overlay" id="generalModal">
+        <div class="modal-card">
+            <button class="modal-close" onclick="closeModal('generalModal')"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-icon"><i class="fa-solid fa-tools"></i></div>
+            <h2 id="modalTitle">සංවර්ධනය වෙමින් පවතී</h2>
+            <p id="modalDesc">මෙම කොටස තවමත් සංවර්ධනය වෙමින් පවතී. කරුණාකර පසුව නැවත උත්සාහ කරන්න.</p>
+            <button class="btn-primary" onclick="closeModal('generalModal')">හරි</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
